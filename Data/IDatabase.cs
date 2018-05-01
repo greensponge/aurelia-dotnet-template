@@ -2,7 +2,7 @@
 
 namespace AureliaDotnetTemplate.Data
 {
-    interface IDatabase : IDisposable
+    interface IDatabase
     {
         string ConnectionString { get; set; }
         string Database { get; }
