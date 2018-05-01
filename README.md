@@ -16,6 +16,7 @@ Then run the command: `dotnet run` and navigate to http://localhost:5000.
 
 To change from port 5000 go to `Program.cs` and edit the line: `.UseUrls("http://localhost:5000/")`
 
+In order for hot-module-reload to work you need to make sure your environment is set for development: `$Env:ASPNETCORE_ENVIRONMENT = "Development"`
 
 ### Testing
 There are two npm scripts saved to the `package.json`. 
