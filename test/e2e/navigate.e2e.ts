@@ -6,7 +6,7 @@ fixture `Sample test`
 test('Basic navigation works', async (t:any) => {
     await t
     .click('#Home')
-    .wait(500) //added wait for demo purposes, it's otherwise too fast
+    .wait(500) //added wait for demo purposes, it's too fast otherwise
     .expect(Selector('h1').innerText).eql('Hello, world!')
 
     .click('#Counter')

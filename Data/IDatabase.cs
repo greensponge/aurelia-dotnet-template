@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TIMS2_2__0.Data
+namespace AureliaDotnetTemplate.Data
 {
     interface IDatabase : IDisposable
     {
