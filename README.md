@@ -10,7 +10,7 @@ This repo uses font-awesome instead of glyphicons.
 I wanted a template I could pull from when making new applications that uses the tools I like and is structured in a manner that is logical to me. I also wanted a location to keep an up to date webpack.config.
 
 ### Running the application
-After pulling down the repository simply run `yarn install` (or `npm install`, I recommend using yarn).
+After pulling down the repository first run `dotnet restore`, then `yarn install` (or `npm install`, I recommend using yarn).
 
 Then run the command: `dotnet run` and navigate to http://localhost:5000.
 
