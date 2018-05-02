@@ -13,7 +13,6 @@
         <img width="150" height="150" hspace="15" src="https://docs.microsoft.com/en-us/dotnet/images/hub/netcore.svg">
     </a>
     <h1>Aurelia dotnet template</h1>
-    <hr>
 </div>
 
 ### Description
