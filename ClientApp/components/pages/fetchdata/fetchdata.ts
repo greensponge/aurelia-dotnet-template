@@ -1,10 +1,10 @@
 import { HttpClient } from "aurelia-fetch-client";
-import { inject, Aurelia } from "aurelia-framework";
+import { autoinject } from "aurelia-framework";
 import { appHeaders, fetchCredentials } from "../../../boot";
 
-@inject(HttpClient)
+@autoinject
 export class Fetchdata {
-	constructor(private http: HttpClient, private aurelia: Aurelia) { }
+	constructor(private http: HttpClient) { }
 
 	public forecasts: WeatherForecast[] = [];
 
