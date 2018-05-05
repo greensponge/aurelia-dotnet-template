@@ -52,10 +52,10 @@ To change the configured port from 5000 edit the file `Program.cs` in the root f
 In order for hot-module-reload to work you need to make sure your environment is set to development **before** running the application, for example running one of the following commands for your platform: 
 
 1. Windows
-    a.`$Env:ASPNETCORE_ENVIRONMENT = "Development"`.
-    b. `set ASPNETCORE_ENVIRONMENT=Development`
+    1. `$Env:ASPNETCORE_ENVIRONMENT = "Development"`
+    2. `set ASPNETCORE_ENVIRONMENT=Development`
 2. Unix
-    a. `export ASPNETCORE_ENVIRONMENT=Development`
+    1. `export ASPNETCORE_ENVIRONMENT=Development`
 
 ### Testing
 There are two npm scripts saved to the `package.json`. 
