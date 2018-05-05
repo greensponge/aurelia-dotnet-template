@@ -39,8 +39,8 @@ After pulling down the repository, navigate to the application root folder and r
 
 1. `dotnet restore`
 2. Then select either
-    a. `yarn install` or
-    b. `npm install`, although yarn is assumed in prerequisites.
+              1. `yarn install` or
+              2. `npm install`, although yarn is assumed in prerequisites.
 3. `dotnet run`
 
 and navigate to http://localhost:5000.
