@@ -30,7 +30,7 @@
 
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
-    <Exec Command="npm install" />
+    <Exec Command="yarn install" />
     <Exec Command="node node_modules/webpack/bin/webpack.js --mode production" />
 
     <!-- Include the newly-built files in the publish output -->
