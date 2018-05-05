@@ -8,8 +8,8 @@
     "emitDecoratorMetadata": true,
     "skipDefaultLibCheck": true,
     "strict": true,
-    "baseUrl": "ClientApp",
-    "sourceRoot": "ClientApp",
+    "baseUrl": "src",
+    "sourceRoot": "src",
     "skipLibCheck": true,
     "lib": [
       "es2017",

@@ -32,7 +32,7 @@ module.exports = (env, argv) => {
 
 		resolve: {
 			extensions: ['.ts', '.tsx', '.js'],
-			modules: ['ClientApp', 'node_modules'].map(x => path.resolve(x)),
+			modules: ['src', 'node_modules'].map(x => path.resolve(x)),
 			alias: {}
 		},
 		output: {
@@ -75,7 +75,7 @@ module.exports = (env, argv) => {
 			new webpack.DefinePlugin({ IS_DEV_BUILD: JSON.stringify(isDevBuild) }),
 			new webpack.ProvidePlugin({ Promise: "bluebird", $: "jquery", jQuery: "jquery", 'window.jQuery': 'jquery', Popper: ['popper.js', 'default'] }),
 			new AureliaPlugin({ aureliaApp: 'boot' }),
-			new GlobDependenciesPlugin({ "boot": ["ClientApp/**/*.{ts,html}"] }),
+			new GlobDependenciesPlugin({ "boot": ["src/**/*.{ts,html}"] }),
 			new ModuleDependenciesPlugin({}),
 			extractCSS,
 			new CopyWebpackPlugin([
