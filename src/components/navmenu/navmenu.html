@@ -11,7 +11,7 @@
 			<ul class="navbar-nav">
 				<li repeat.for="row of router.navigation" class="nav-item ${row.isActive ? 'active' : ''}">
 					<a href.bind="row.href" class="nav-link" id="${ row.title | removeSpace}">
-						<span class="fa fa-${row.settings.icon}"></span> ${row.title}
+						<span class="${row.settings.prefix} fa-${row.settings.icon}"></span> ${row.title}
 					</a>
 				</li>
 			</ul>

@@ -1,20 +1,49 @@
+.fa-spinner:before {
+    content: "\f110";
+}
+
+.fa-spin {
+    -webkit-animation: fa-spin 2s infinite linear;
+    animation: fa-spin 2s infinite linear;
+}
+
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@-webkit-keyframes fa-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
 .splash {
     text-align: center;
     margin: 10% 0 0 0;
     box-sizing: border-box;
-  }
-  
-  .splash .message {
+}
+
+.splash .message {
     font-size: 72px;
     line-height: 72px;
     text-shadow: rgba(0, 0, 0, 0.5) 0 0 15px;
     text-transform: uppercase;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
-  
-  .splash .fa-spinner {
+}
+
+.splash .fa-spinner {
     text-align: center;
     display: inline-block;
     font-size: 72px;
     margin-top: 50px;
-  }
+}

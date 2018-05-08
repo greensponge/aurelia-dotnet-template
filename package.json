@@ -43,9 +43,12 @@
 		"testcafe": "testcafe firefox test/e2e/"
 	},
 	"dependencies": {
+		"@fortawesome/fontawesome": "^1.1.7",
+		"@fortawesome/fontawesome-free-brands": "^5.0.12",
+		"@fortawesome/fontawesome-free-regular": "^5.0.12",
+		"@fortawesome/fontawesome-free-solid": "^5.0.12",
 		"bluebird": "^3.5.1",
 		"bootstrap": "^4.1.1",
-		"font-awesome": "^4.7.0",
 		"jquery": "^3.3.1",
 		"popper.js": "^1.14.3",
 		"whatwg-fetch": "^2.0.4"
