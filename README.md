@@ -21,7 +21,7 @@ This template is the result of combining what I liked from the original [Javascr
 ### About
 This repo uses the Aurelia framework, TypeScript, .NET Core 2, Bootstrap 4 and the latest Webpack. It has unit testing using mocha, chai and sinon as well as the e2e testing suite [testcafe](https://github.com/DevExpress/testcafe) with very basic examples included.
 
-This repo uses font-awesome instead of glyphicons.
+This repo uses font-awesome 5 instead of glyphicons. More about font-awesome 5 below.
 
 ### Prerequisites
 To run this repository without issue there are a couple of tools you should have installed. If you are missing any of the below, follow the instructions and install them for your platform.
@@ -67,3 +67,50 @@ Running `npm run test` runs the unit tests located in `test/unit/*.spec.ts`.
 First run the application and then from a new CLI run `npm run testcafe`, this will run the e2e tests located in `test/e2e/*`.
 
 It's configured to use firefox, if you wish to use something else, for example chrome, simply change `firefox` to `chrome` under scripts in the `package.json`.
+
+### Font-Awesome 5
+I've pre-configured font-awesome 5 to use the new SVG-based framework in this repository. Since it's quite different from just importing the web-fonts css, I thought I'd describe the setup briefly.
+
+I've added the following packages:
+
+```js
+"@fortawesome/fontawesome" // the "factory" that builds your icons
+"@fortawesome/fontawesome-free-brands" // all available free icons
+"@fortawesome/fontawesome-free-regular"
+"@fortawesome/fontawesome-free-solid"
+```
+
+The imports can be found in `src/components/app.ts`:
+
+```ts
+import fontawesome from '@fortawesome/fontawesome';
+import { faHome, faPlus, faThList } from '@fortawesome/fontawesome-free-solid';
+
+// Pre-registering icon definitions so that you do not have to explicitly pass them to render an icon.
+fontawesome.library.add(faHome, faPlus, faThList /*solid, etc..*/);
+...
+    config.map([{
+        ...
+        settings: { 
+                icon: faHome.iconName, // the name of the imported icon
+                prefix: faHome.prefix // the icon prefix, fas/far/fab etc.
+            },
+        ...
+    },
+...
+```
+
+The router settings defined in app.ts are used in the navmenu (`src/components/navmenu/navmenu.html`):
+```html
+...
+<a...>
+    <span class="${row.settings.prefix} fa-${row.settings.icon}"></span> ${row.title}
+</a>
+...
+```
+
+If you want to add an icon that can be used later without explicit imports, simply append it to the end of `fontawesome.library.add(faCameraRetro, ...` defined above. You could then in other files just use the icon name directly like you might be used to: 
+
+```html
+<i class="fas fa-camera-retro"></i>
+```

@@ -11,7 +11,7 @@ import fontawesome from '@fortawesome/fontawesome';
 import { faHome, faPlus, faThList } from '@fortawesome/fontawesome-free-solid';
 
 // Pre-registering icon definitions so that you do not have to explicitly pass them to render an icon.
-fontawesome.library.add(faHome, faPlus, faThList, /*solid, etc..*/);
+fontawesome.library.add(faHome, faPlus, faThList /*solid, etc..*/);
 
 export class App {
 	configureRouter(config: RouterConfiguration, router: Router) {
@@ -20,7 +20,6 @@ export class App {
 			route: ["", "home"],
 			name: "home",
 			settings: { icon: faHome.iconName, prefix: faHome.prefix },
-			fontPrefix: 'fa',
 			moduleId: PLATFORM.moduleName("../../components/pages/home/home"),
 			nav: true,
 			title: "Home"
