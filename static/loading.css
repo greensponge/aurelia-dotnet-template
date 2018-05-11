@@ -1,19 +1,29 @@
-.fa-spinner:before {
-    content: "\f110";
+@font-face {
+    font-family: 'fa-spinner';
+    src: url('./webfonts/fa-spinner.eot?dhu8c8');
+    src: url('./webfonts/fa-spinner.eot?dhu8c8#iefix') format('embedded-opentype'), url('./webfonts/fa-spinner.ttf?dhu8c8') format('truetype'), url('./webfonts/fa-spinner.woff?dhu8c8') format('woff'), url('./webfonts/fa-spinner.svg?dhu8c8#fa-spinner') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="fa-"],
+[class*=" fa-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'fa-spinner' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .fa-spin {
     -webkit-animation: fa-spin 2s infinite linear;
     animation: fa-spin 2s infinite linear;
-}
-
-.fa {
-  display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
-  font-size: inherit;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 @-webkit-keyframes fa-spin {
@@ -22,9 +32,24 @@
         transform: rotate(0deg);
     }
     100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
     }
+}
+
+@keyframes fa-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.fa-spinner:before {
+    content: "\e97a";
 }
 
 .splash {

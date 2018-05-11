@@ -79,8 +79,9 @@ module.exports = (env, argv) => {
 			new ModuleDependenciesPlugin({}),
 			extractCSS,
 			new CopyWebpackPlugin([
-				{ from: resolve('../Static/favicon.ico'), to: resolve('dist/favicon.ico') },
-				{ from: resolve('../Static/loading.css'), to: resolve('dist/loading.css') }
+				{ from: resolve('../static/favicon.ico'), to: resolve('dist/favicon.ico') },
+				{ from: resolve('../static/loading.css'), to: resolve('dist/loading.css') },
+				{ from: resolve('../static/webfonts'), to: resolve('dist/webfonts') }
 			], { debug: 'info' })
 		]
 	}];
