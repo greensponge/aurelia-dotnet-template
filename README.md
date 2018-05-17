@@ -68,6 +68,11 @@ First run the application and then from a new CLI run `npm run testcafe`, this w
 
 It's configured to use firefox, if you wish to use something else, for example chrome, simply change `firefox` to `chrome` under scripts in the `package.json`.
 
+### Debugging with VS Code
+This repository has some debugging configurations for mocha tests and normal TS files that works for VS code. You have to change `module` in `tsconfig.json` to `commonjs` in all likelihood for this to work.
+
+Simply have the test or TS file selected and run the appropriate debugging configuration. Breakpoints and step debugging should then work for you.
+
 ### Font-Awesome 5
 I've pre-configured font-awesome 5 to use the new SVG-based framework in this repository. Since it's quite different from just importing the web-fonts css, I thought I'd describe the setup briefly.
 
