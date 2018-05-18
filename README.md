@@ -119,3 +119,88 @@ If you want to add an icon that can be used later without explicit imports, simp
 ```html
 <i class="fas fa-camera-retro"></i>
 ```
+
+### Adding a new controller
+I used a repository pattern when I setup the `SampleDataController`. If you've never seen this before then I'll try to describe how to add a new Controller as briefly as possible below.
+
+1. Add an interface that contains the method contracts that you will use.
+
+`Models/SampleData/ISampleDataRepository.cs`:
+
+```csharp
+namespace AureliaDotnetTemplate.Models
+{
+    public interface ISampleDataRepository
+    {
+        IEnumerable<WeatherForecast> WeatherForecasts();
+    }
+}
+```
+
+2. Implement those methods.
+
+`Models/SampleData/SampleDataRepository.cs`:
+
+```csharp
+namespace AureliaDotnetTemplate.Models
+{
+    public class SampleDataRepository : ISampleDataRepository
+    {
+        public IEnumerable<WeatherForecast> WeatherForecasts()
+        {
+            string[] Summaries = new[]{
+                "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            };
+
+            var rng = new Random();
+
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                DateFormatted = DateTime.Now.AddDays(index).ToString("d"),
+                TemperatureC = rng.Next(-20, 55),
+                Summary = Summaries[rng.Next(Summaries.Length)]
+            });
+        }
+    }
+}
+```
+3. Inject it into the Controller.
+
+`Controllers/SampleDataController.cs`
+
+```csharp
+namespace AureliaDotnetTemplate.Controllers
+{
+    [Produces("application/json")]
+    public class SampleDataController : Controller
+    {
+        public SampleDataController(ISampleDataRepository sampleData)
+        {
+            SampleDataItem = sampleData;
+        }
+        public ISampleDataRepository SampleDataItem { get; set; }
+
+        [HttpGet("api/weatherforecast")]
+        public IEnumerable<WeatherForecast> WeatherForecasts()
+        {
+            return SampleDataItem.WeatherForecasts();
+        }
+    }
+}
+```
+
+4. And finally make sure to register it in `Startup.cs`->`ConfigureServices()`
+```csharp
+...
+        public void ConfigureServices(IServiceCollection services)
+        {
+            ...
+            services.AddSingleton<ISampleDataRepository, SampleDataRepository>();
+            ...
+        }
+...        
+```
+
+And that's pretty much all there's too it, there are different versions of this pattern with slight variations, but these are the basics and they have served me well in the past. 
+
+In truth, it doesn't really matter for the current example. It starts making more sense when you link databases to your project. But feel free to use whatever (pattern) makes you happy.
