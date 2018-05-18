@@ -8,20 +8,18 @@ declare const IS_DEV_BUILD: boolean; // The value is supplied by Webpack during 
 
 Bluebird.config({ warnings: { wForgottenReturn: false }, longStackTraces: false });
 
-export function configure(aurelia: Aurelia) {
+export async function configure(aurelia: Aurelia) {
     aurelia.use.standardConfiguration();
-    //.plugin(PLATFORM.moduleName('aurelia-validation')) //plugin example, must use PLATFORM.moduleName if using webpack
+    //.plugin(PLATFORM.moduleName('aurelia-validation')) //plugin example, you must use PLATFORM.moduleName when using webpack.
 
     if (IS_DEV_BUILD) {
         aurelia.use.developmentLogging();
     }
 
-    new HttpClient().configure(config => {
-        const baseUrl = document.getElementsByTagName("base")[0].href;
-        config.withBaseUrl(baseUrl);
-    });
+    new HttpClient().configure(config => { config.withBaseUrl(document.getElementsByTagName("base")[0].href) });
 
-    aurelia.start().then(() => aurelia.setRoot("components/app/app"));
+    await aurelia.start();
+    await aurelia.setRoot(PLATFORM.moduleName("components/app/app"));
 }
 
 export const fetchCredentials: RequestCredentials = "include";

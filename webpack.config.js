@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const { AureliaPlugin, ModuleDependenciesPlugin, GlobDependenciesPlugin } = require('aurelia-webpack-plugin');
+const { AureliaPlugin, ModuleDependenciesPlugin } = require('aurelia-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const extractCSS = new ExtractTextPlugin("vendor.css")
@@ -75,7 +75,6 @@ module.exports = (env, argv) => {
 			new webpack.DefinePlugin({ IS_DEV_BUILD: JSON.stringify(isDevBuild) }),
 			new webpack.ProvidePlugin({ Promise: "bluebird", $: "jquery", jQuery: "jquery", 'window.jQuery': 'jquery', Popper: ['popper.js', 'default'] }),
 			new AureliaPlugin({ aureliaApp: 'boot' }),
-			new GlobDependenciesPlugin({ "boot": ["src/**/*.{ts,html}"] }),
 			new ModuleDependenciesPlugin({}),
 			extractCSS,
 			new CopyWebpackPlugin([
