@@ -47,6 +47,12 @@ and navigate to http://localhost:5000.
 
 To change the configured port from 5000 edit the file `Program.cs` in the root folder on the line: `.UseUrls("http://localhost:5000/")`.
 
+**IMPORTANT!** If you use Visual Studio 2017 at any point then `Properties/launchSettings.json` gets created, this path is ignored in `.gitignore` so it might be hard to notice unless you know where to look. This overrides `ASPNETCORE_ENVIRONMENT` and the application then always launches with "Development".
+
+You probably find `launchSettings.json` useful if you use Visual Studio with for example `IIS`, if you want to launch the template in production mode without removing/editing this file then you can run this command instead of `3.` above:
+
+`dotnet run --no-launch-profile`
+
 ### Hot module reload
 
 In order for hot-module-reload to work you need to make sure your environment is set to development **before** running the application, for example running one of the following commands for your platform: 
