@@ -26,7 +26,7 @@ module.exports = (env, argv) => {
 		mode: isDevBuild ? "development" : "production",
 		entry: {
 			app: ['aurelia-bootstrapper'],
-			vendor: ['bluebird']
+			vendor: ['bluebird', 'event-source-polyfill']
 		},
 		//stats: { modules: false },
 
