@@ -6,9 +6,17 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const extractCSS = new ExtractTextPlugin("vendor.css")
 
 module.exports = (env, argv) => {
-	if ((!argv || !argv.mode) && process.env.ASPNETCORE_ENVIRONMENT === "Development") {
-		argv = { mode: "development" };
-	}
+    if ((!argv || !argv.mode) && process.env.ASPNETCORE_ENVIRONMENT === "Development") {
+        argv = { mode: "development" };
+    }
+    else if (process.env.ASPNETCORE_ENVIRONMENT === "Production") {
+        // In case testing the production build is warranted, set ASPNETCORE_ENVIRONMENT to Production
+        // in .csproj Debug tab or if using dotnet run, either by $Env:ASPNETCORE_ENVIRONMENT = "Development" or
+        // set ASPNETCORE_ENVIRONMENT=Development. See more at https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments.
+        // In addition to this, you need to temporarily make the WebPack Developer middleware run outside of debugging
+        // (e.g. take out from the branch, disable it or some other measure).
+        argv = { mode: "production" };
+    }
 
 	console.log("mode=", argv.mode);
 	const isDevBuild = argv.mode !== "production";
