@@ -23,4 +23,3 @@ export async function configure(aurelia: Aurelia) {
 }
 
 export const fetchCredentials: RequestCredentials = "include";
-export const appHeaders: string[][] = ([['pragma', 'no-cache'], ['cache-control', 'no-cache']]);

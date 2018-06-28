@@ -20,7 +20,8 @@
   "exclude": [
     "bin",
     "node_modules",
-    "test/unit/*.spec.ts"
+    "test/unit/*.spec.ts",
+    "test/unit/init.ts"
   ],
   "atom": {
     "rewriteTsconfig": false

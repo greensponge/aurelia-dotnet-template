@@ -1,6 +1,6 @@
 import { HttpClient } from "aurelia-fetch-client";
 import { autoinject } from "aurelia-framework";
-import { appHeaders, fetchCredentials } from "../../../boot";
+import { fetchCredentials } from "../../../boot";
 
 @autoinject
 export class Fetchdata {
@@ -14,7 +14,7 @@ export class Fetchdata {
 
 	private ForecastData(): Promise<any> {
 		const promise = new Promise((resolve, reject) => {
-			this.http.fetch('api/weatherforecast', { headers: appHeaders, credentials: fetchCredentials })
+			this.http.fetch('api/weatherforecast', { credentials: fetchCredentials })
 				.then((response): any => response.json())
 				.then(data => {
 					return resolve(data);

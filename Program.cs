@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace AureliaDotnetTemplate
 {
@@ -17,10 +12,23 @@ namespace AureliaDotnetTemplate
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static string EnvironmentVariable = "";
+
+        public static IWebHost BuildWebHost(string[] args)
+        {
+
+            string currentDirectoryPath = Directory.GetCurrentDirectory();
+            string envSettingsPath = Path.Combine(currentDirectoryPath, "envsettings.json");
+            JObject envSettings = JObject.Parse(File.ReadAllText(envSettingsPath));
+            string environmentValue = envSettings["ASPNETCORE_ENVIRONMENT"].ToString();
+
+            EnvironmentVariable = string.IsNullOrEmpty(environmentValue) ? "Production" : environmentValue;
+  
+            return WebHost.CreateDefaultBuilder(args)
+                .UseEnvironment(EnvironmentVariable)
                 .UseStartup<Startup>()
                 .UseUrls("http://localhost:5000/")
                 .Build();
+        }
     }
 }
