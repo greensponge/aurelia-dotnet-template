@@ -4,20 +4,11 @@ const { AureliaPlugin, ModuleDependenciesPlugin } = require('aurelia-webpack-plu
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const extractCSS = new ExtractTextPlugin("vendor.css")
+const environmentSettings = require("./envsettings.json").ASPNETCORE_ENVIRONMENT
 
 module.exports = (env, argv) => {
-	if ((!argv || !argv.mode) && process.env.ASPNETCORE_ENVIRONMENT === "Development") {
-		argv = { mode: "development" };
-	}
-	else if (process.env.ASPNETCORE_ENVIRONMENT === "Production") {
-		// ASPNETCORE_ENVIRONMENT is controlled from "envsettings.json" located in the root folder.
-		// Use the pre-configured environments: "Development" and "Production".
-		// Using "Development" will enable hot module reloading (HMR).
-		argv = { mode: "production" };
-	}
-
-	console.log("mode=", argv.mode);
-	const isDevBuild = argv.mode !== "production";
+	console.log("mode=", environmentSettings);
+	const isDevBuild = environmentSettings !== "Production";
 	const cssLoader = { loader: isDevBuild ? "css-loader" : "css-loader?minimize" };
 
 	function resolve(dir) {

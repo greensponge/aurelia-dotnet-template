@@ -1,6 +1,7 @@
 using AureliaDotnetTemplate.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +22,10 @@ namespace AureliaDotnetTemplate
         {
             services.AddMvc();
 
+            // Add response compression middleware using gzip
+            services.Configure<GzipCompressionProviderOptions>(options => options.Level = System.IO.Compression.CompressionLevel.Optimal);
+            services.AddResponseCompression();
+
             // Add application services.
             services.AddSingleton<ISampleDataRepository, SampleDataRepository>();
         }
@@ -40,6 +45,8 @@ namespace AureliaDotnetTemplate
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseResponseCompression();
 
             app.UseStaticFiles();
 

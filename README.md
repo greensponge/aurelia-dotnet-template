@@ -51,6 +51,18 @@ Environment options:
 1. "Development"
 2. "Production"
 
+### Response compression
+I have configured responses to use gzip compression middleware in production mode. If you want to use other compression methods or disable this, navigate to `Startup.cs` and edit these lines:
+
+```csharp
+public void ConfigureServices(...){
+services.Configure<GzipCompressionProviderOptions>(options => options.Level = System.IO.Compression.CompressionLevel.Optimal);
+services.AddResponseCompression();
+...
+public void Configure(...){
+    app.UseResponseCompression();
+```
+
 ### Testing
 There are two npm scripts saved to the `package.json`. 
 
