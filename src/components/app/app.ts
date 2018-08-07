@@ -1,17 +1,16 @@
-import { Aurelia, PLATFORM } from "aurelia-framework";
+import { PLATFORM } from "aurelia-framework";
 import { Router, RouterConfiguration } from "aurelia-router";
 
-// import entire folders if you want like this:
 
-// import solid from '@fortawesome/fontawesome-free-solid';
-// import regular from '@fortawesome/fontawesome-free-regular';
-// import brands from '@fortawesome/fontawesome-free-brands';
+import { library, dom } from '@fortawesome/fontawesome-svg-core'
+import { faHome, faPlus, faThList } from '@fortawesome/free-solid-svg-icons'
+// import { faTwitter } from '@fortawesome/free-brands-svg-icons'
+// import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 
-import fontawesome from '@fortawesome/fontawesome';
-import { faHome, faPlus, faThList } from '@fortawesome/fontawesome-free-solid';
+library.add(faHome, faPlus, faThList)
 
-// Pre-registering icon definitions so that you do not have to explicitly pass them to render an icon.
-fontawesome.library.add(faHome, faPlus, faThList /*solid, etc..*/);
+// Kicks off the process of finding <i> tags and replacing with <svg>
+dom.watch()
 
 export class App {
 	configureRouter(config: RouterConfiguration, router: Router) {

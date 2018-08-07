@@ -21,7 +21,7 @@ This template is the result of combining what I liked from the original [Javascr
 ### About
 This repo uses the Aurelia framework, TypeScript, .NET Core 2.1, Bootstrap 4 and the latest Webpack. It has unit testing using mocha, chai and sinon as well as the e2e testing suite [testcafe](https://github.com/DevExpress/testcafe) with very basic examples included.
 
-This repo uses font-awesome 5 instead of glyphicons. More about font-awesome 5 and how I've used it with Aurelia below.
+This repo uses font-awesome 5.2 instead of glyphicons. More about font-awesome 5 and how I've used it with Aurelia below.
 
 ### Prerequisites
 To run this repository without issue there are a couple of tools you should have installed. If you are missing any of the below, follow the instructions and install them for your platform.
@@ -79,26 +79,30 @@ This repository has some debugging configurations for mocha tests and normal TS 
 
 Simply have the test or TS file selected and run the appropriate debugging configuration. Breakpoints and step debugging should then work for you.
 
-### Font-Awesome 5
-I've pre-configured font-awesome 5 to use the new SVG-based framework in this repository. Since it's quite different from just importing the web-fonts css, I thought I'd describe the setup briefly.
+### Font-Awesome 5.2
+I've pre-configured font-awesome 5.2 to use the new SVG-based framework in this repository. Since it's quite different from just importing the web-fonts css, I thought I'd describe the setup briefly.
 
-I've added the following packages:
+I've added the all the free packages:
 
 ```js
-"@fortawesome/fontawesome" // the "factory" that builds your icons
-"@fortawesome/fontawesome-free-brands" // all available free icons
-"@fortawesome/fontawesome-free-regular"
-"@fortawesome/fontawesome-free-solid"
+"@fortawesome/fontawesome-free": "^5.2.0",
+"@fortawesome/fontawesome-svg-core": "^1.2.2",
+"@fortawesome/free-brands-svg-icons": "^5.2.0",
+"@fortawesome/free-regular-svg-icons": "^5.2.0",
+"@fortawesome/free-solid-svg-icons": "^5.2.0",
 ```
 
 The imports can be found in `src/components/app.ts`:
 
 ```ts
-import fontawesome from '@fortawesome/fontawesome';
-import { faHome, faPlus, faThList } from '@fortawesome/fontawesome-free-solid';
+import { library, dom } from '@fortawesome/fontawesome-svg-core'
+import { faHome, faPlus, faThList } from '@fortawesome/free-solid-svg-icons'
 
 // Pre-registering icon definitions so that you do not have to explicitly pass them to render an icon.
-fontawesome.library.add(faHome, faPlus, faThList /*solid, etc..*/);
+library.add(faHome, faPlus, faThList);
+
+// Kicks off the process of finding <i> tags and replacing with <svg>
+dom.watch()
 ...
     config.map([{
         ...
@@ -120,7 +124,7 @@ The router settings defined in app.ts are used in the navmenu (`src/components/n
 ...
 ```
 
-If you want to add an icon that can be used later without explicit imports, simply append it to the end of `fontawesome.library.add(faCameraRetro, ...` defined above. You could then in other files just use the icon name directly like you might be used to: 
+If you want to add an icon that can be used later without explicit imports, simply append it to the end of `library.add(faCameraRetro, ...` defined above. You could then in other files just use the icon name directly like you might be used to: 
 
 ```html
 <i class="fas fa-camera-retro"></i>
