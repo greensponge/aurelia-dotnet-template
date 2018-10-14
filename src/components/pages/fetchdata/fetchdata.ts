@@ -1,6 +1,13 @@
 import { HttpClient } from "aurelia-fetch-client";
 import { autoinject } from "aurelia-framework";
-import { fetchCredentials } from "../../../boot";
+import { fetchCredentials, appHeaders } from "../../../boot";
+
+interface WeatherForecast {
+	dateFormatted: string;
+	temperatureC: number;
+	temperatureF: number;
+	summary: string;
+}
 
 @autoinject
 export class Fetchdata {
@@ -8,25 +15,20 @@ export class Fetchdata {
 
 	public forecasts: WeatherForecast[] = [];
 
-	activate() {
-		this.ForecastData().then((data: WeatherForecast[]) => { this.forecasts = data; });
+	async activate() {
+		this.forecasts = await this.ForecastData();
 	}
 
-	private ForecastData(): Promise<any> {
-		const promise = new Promise((resolve, reject) => {
-			this.http.fetch('api/weatherforecast', { credentials: fetchCredentials })
-				.then((response): any => response.json())
-				.then(data => {
-					return resolve(data);
-				}).catch(err => reject(err));
-		});
-		return promise;
-	}
-}
+	private async ForecastData(): Promise<WeatherForecast[]> {
+		try {
+			const response: Response = await this.http.fetch('api/weatherforecast', { credentials: fetchCredentials, headers: appHeaders });
+			const body: string = await response.json();
+			const weatherForecastData: WeatherForecast[] = JSON.parse(JSON.stringify(body));
 
-interface WeatherForecast {
-	dateFormatted: string;
-	temperatureC: number;
-	temperatureF: number;
-	summary: string;
+			return weatherForecastData;
+		} catch (error) {
+			console.log(`Something went wrong when fetching the weather forecast: ${error}`);
+			return [];
+		}
+	}
 }

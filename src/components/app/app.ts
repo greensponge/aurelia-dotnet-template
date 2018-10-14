@@ -7,10 +7,10 @@ import { faHome, faPlus, faThList } from '@fortawesome/free-solid-svg-icons'
 // import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 // import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 
-library.add(faHome, faPlus, faThList)
+library.add(faHome, faPlus, faThList);
 
 // Kicks off the process of finding <i> tags and replacing with <svg>
-dom.watch()
+dom.watch();
 
 export class App {
 	configureRouter(config: RouterConfiguration, router: Router) {

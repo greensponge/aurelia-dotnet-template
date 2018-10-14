@@ -21,7 +21,7 @@ This template is the result of combining what I liked from the original [Javascr
 ### About
 This repo uses the Aurelia framework, TypeScript, .NET Core 2.1, Bootstrap 4 and the latest Webpack. It has unit testing using mocha, chai and sinon as well as the e2e testing suite [testcafe](https://github.com/DevExpress/testcafe) with very basic examples included.
 
-This repo uses font-awesome 5.2 instead of glyphicons. More about font-awesome 5 and how I've used it with Aurelia below.
+This repo uses font-awesome 5 instead of glyphicons. More about font-awesome 5 and how I've used it with Aurelia below.
 
 ### Prerequisites
 To run this repository without issue there are a couple of tools you should have installed. If you are missing any of the below, follow the instructions and install them for your platform.
@@ -79,8 +79,8 @@ This repository has some debugging configurations for mocha tests and normal TS 
 
 Simply have the test or TS file selected and run the appropriate debugging configuration. Breakpoints and step debugging should then work for you.
 
-### Font-Awesome 5.2
-I've pre-configured font-awesome 5.2 to use the new SVG-based framework in this repository. Since it's quite different from just importing the web-fonts css, I thought I'd describe the setup briefly.
+### Font-Awesome 5
+I've pre-configured font-awesome 5 to use the new SVG-based framework in this repository. Since it's quite different from just importing the web-fonts css, I thought I'd describe the setup briefly.
 
 I've added the all the free packages:
 
