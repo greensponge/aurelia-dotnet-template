@@ -2,8 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const { AureliaPlugin, ModuleDependenciesPlugin } = require('aurelia-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const extractCSS = new ExtractTextPlugin("vendor.css")
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const environmentSettings = require("./envsettings.json").ASPNETCORE_ENVIRONMENT
 
 module.exports = (env, argv) => {
@@ -44,7 +43,7 @@ module.exports = (env, argv) => {
 				{ test: /\.html$/i, use: "html-loader" },
 				// use Bluebird as the global Promise implementation:
 				{ test: /[\/\\]node_modules[\/\\]bluebird[\/\\].+\.js$/, loader: 'expose-loader?Promise' },
-				{ test: /\.css(\?|$)/, include: [/node_modules/], loader: extractCSS.extract([isDevBuild ? 'css-loader' : 'css-loader?minimize']) },
+				{ test: /\.css(\?|$)/, include: [/node_modules/], use: [{ loader: MiniCssExtractPlugin.loader }, cssLoader] },
 				{ test: /\.css$/i, exclude: [/node_modules/], issuer: /\.html$/i, use: cssLoader },
 				{ test: /\.css$/i, exclude: [/node_modules/], issuer: [{ not: [{ test: /\.html$/i }] }], use: ["style-loader", cssLoader] },
 				{ test: /\.scss$/i, issuer: /(\.html|empty-entry\.js)$/i, use: [cssLoader, "sass-loader"] },
@@ -71,7 +70,12 @@ module.exports = (env, argv) => {
 			new webpack.ProvidePlugin({ Promise: "bluebird", $: "jquery", jQuery: "jquery", 'window.jQuery': 'jquery', Popper: ['popper.js', 'default'] }),
 			new AureliaPlugin({ aureliaApp: 'boot' }),
 			new ModuleDependenciesPlugin({}),
-			extractCSS,
+			new MiniCssExtractPlugin({
+				// Options similar to the same options in webpackOptions.output
+				// both options are optional
+				filename: "[name].css",
+				chunkFilename: "[name].css"
+			}),
 			new CopyWebpackPlugin([
 				{ from: resolve('../static/favicon.ico'), to: resolve('dist/favicon.ico') },
 				{ from: resolve('../static/loading.css'), to: resolve('dist/loading.css') },
