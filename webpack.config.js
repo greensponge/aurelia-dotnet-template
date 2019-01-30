@@ -3,13 +3,13 @@ const webpack = require('webpack');
 const { AureliaPlugin, ModuleDependenciesPlugin } = require('aurelia-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const environmentSettings = require("./envsettings.json").ASPNETCORE_ENVIRONMENT
+const environmentSettings = require("./envsettings.json").ASPNETCORE_ENVIRONMENT;
 
 module.exports = (env, argv) => {
 	console.log("mode=", environmentSettings);
 	const isDevBuild = environmentSettings !== "Production";
 	const cssLoader = { loader: isDevBuild ? "css-loader" : "css-loader?minimize" };
-
+	
 	function resolve(dir) {
 		return path.join(__dirname, 'wwwroot', dir);
 	}
@@ -20,10 +20,7 @@ module.exports = (env, argv) => {
 		},
 		target: "web",
 		mode: isDevBuild ? "development" : "production",
-		entry: {
-			app: ['aurelia-bootstrapper'],
-			vendor: ['bluebird', 'event-source-polyfill']
-		},
+		entry: { app: ['aurelia-bootstrapper', 'bluebird'] },
 		resolve: {
 			extensions: ['.ts', '.tsx', '.js'],
 			modules: ['src', 'node_modules'].map(x => path.resolve(x)),
